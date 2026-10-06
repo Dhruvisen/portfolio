@@ -7,20 +7,13 @@ interface Message {
   content: string;
 }
 
-const SUGGESTED_QUESTIONS = [
-  "What AI projects has she built?",
-  "What is her RAG experience?",
-  "What technologies does she use?",
-  "Tell me about the Agentic ERP project.",
-];
-
 export default function AskPortfolioButton() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
       content:
-        "Hi! I'm Dhruvi's AI portfolio assistant powered by NVIDIA Llama 3.1 Nemotron. Ask me anything about her experience, projects, or skills. 👋",
+        "Hi! I'm Dhruvi's AI portfolio assistant. Ask me any question about her background, experience, projects, skills, or contact info! 👋",
     },
   ]);
   const [input, setInput] = useState("");
@@ -349,49 +342,7 @@ export default function AskPortfolioButton() {
               </div>
             )}
 
-            {/* Suggested questions (show only on fresh start) */}
-            {messages.length === 1 && !loading && (
-              <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginTop: "4px" }}>
-                <p
-                  style={{
-                    fontSize: "0.72rem",
-                    color: "var(--text-muted)",
-                    fontFamily: "'JetBrains Mono', monospace",
-                    marginBottom: "2px",
-                  }}
-                >
-                  Try asking:
-                </p>
-                {SUGGESTED_QUESTIONS.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => sendMessage(q)}
-                    style={{
-                      textAlign: "left",
-                      padding: "6px 10px",
-                      borderRadius: "8px",
-                      background: "rgba(99,102,241,0.06)",
-                      border: "1px solid rgba(99,102,241,0.15)",
-                      color: "var(--accent-secondary)",
-                      fontSize: "0.78rem",
-                      cursor: "pointer",
-                      transition: "all 0.2s",
-                      fontFamily: "'Inter', sans-serif",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget).style.background = "rgba(99,102,241,0.12)";
-                      (e.currentTarget).style.borderColor = "rgba(99,102,241,0.35)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget).style.background = "rgba(99,102,241,0.06)";
-                      (e.currentTarget).style.borderColor = "rgba(99,102,241,0.15)";
-                    }}
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            )}
+
 
             <div ref={bottomRef} />
           </div>

@@ -1,75 +1,92 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const NVIDIA_API_KEY = "3JMPQConaHvpmsUtjoPZY9ofeaO_2fVGfvyRdaDgfHRYUr8WR";
+/**
+ * Portfolio AI Assistant API Endpoint
+ * Grounded in Dhruvi Senjaliya's verified portfolio data.
+ * Explicitly answers 2 years of experience in AI/ML & Deep Learning (DL).
+ */
+
+const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY || "";
 const NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1";
-const MODEL = "nvidia/llama-3.1-nemotron-70b-instruct";
+const MODEL = process.env.PRIMARY_LLM_MODEL || "meta/llama-3.2-11b-vision-instruct";
 
-const SYSTEM_PROMPT = `You are a helpful portfolio assistant for Dhruvi Senjaliya, an AI/ML Developer.
-Answer questions about her professional background, experience, projects, and skills ONLY using the verified information below.
-Be concise (2-4 sentences max), professional, and factual. Do NOT invent or extrapolate any information not listed here.
-If asked something not covered here, say you don't have that detail and suggest contacting her directly.
+const SYSTEM_PROMPT = `You are a helpful portfolio assistant for Dhruvi Senjaliya, an AI/ML Developer based in Gujarat, India.
+When asked about her total experience or experience in AI/ML/DL (Deep Learning), state clearly that Dhruvi Senjaliya has 2 years of professional experience in AI/ML and Deep Learning development.
 
-=== VERIFIED PORTFOLIO DATA ===
+VERIFIED DETAILS:
+- Name: Dhruvi Senjaliya (AI/ML Developer)
+- Total Experience: 2 years of professional experience in AI/ML & Deep Learning (DL)
+- Email: dhruvisenjaliya05@gmail.com | Phone: +91 8320262914
+- LinkedIn: linkedin.com/in/dhruvi-senjaliya-487078247/ | GitHub: github.com/Dhruvisen
+- Current Role: AI/ML Developer at Hexylon Analytics (Feb 2025–Present) building an Agentic ERP platform with HR & Purchase AI agents, Tesseract OCR invoice parsing, database RAG tools, Playwright browser automation, Naukri scraper, TTS fine-tuning (Orpheus/Veena), and face tracking.
+- Previous Role: AI/ML Intern at Bluepixel Technologies LLP (Jul 2024–Jan 2025) building a pathology report AI analysis system using Gemini-1.5-Flash, Django, MySQL, NLTK.
+- Key Projects: Agentic ERP Platform (Hexylon), CodeBase RAG (LlamaIndex + pgvector + Gemini), RAG Pipeline System (ChromaDB + Qdrant), Pathology Report AI Extractor, Real-Time Face Recognition Attendance (OpenCV), Multi-PDF Chat AI Agent.
+- Technical Skills: Python, SQL, LangChain, LangGraph, LlamaIndex, RAG, LLMs, Agentic AI, Deep Learning (DL), FastAPI, Django, MySQL, Redis, pgvector, ChromaDB, Qdrant, OpenCV, Tesseract OCR, Playwright.
+- Education: B.E. in IT from Babaria Institute of Technology, Vadodara (2020–2024).
+- Hackathons & Certifications: Smart India Hackathon (SIH-2022 Finale), SSIP-2022 Hackathon Regional, IBM Relational Databases 101, Great Learning Machine Learning & Python.`;
 
-PERSONAL:
-- Name: Dhruvi Senjaliya
-- Title: AI/ML Developer
-- Email: dhruvisenjaliya05@gmail.com
-- Phone: +91 8320262914
-- Location: Gujarat, India
-- LinkedIn: linkedin.com/in/dhruvi-senjaliya-487078247/
-- GitHub: github.com/Dhruvisen
+const PORTFOLIO_DATA = {
+  name: "Dhruvi Senjaliya",
+  title: "AI/ML Developer",
+  email: "dhruvisenjaliya05@gmail.com",
+  phone: "+91 8320262914",
+  location: "Gujarat, India",
+  linkedin: "linkedin.com/in/dhruvi-senjaliya-487078247/",
+  github: "github.com/Dhruvisen",
+};
 
-CURRENT ROLE:
-- Company: Hexylon Analytics
-- Role: AI/ML Developer (Full-time, In-Office)
-- Location: Ahmedabad, India
-- Duration: Feb 2025 – Present
-- Work: Building an Agentic ERP platform with multiple intelligent agents (HR Agent, Purchase Agent), OCR-based invoice processing, database-driven agents, chat-based RAG tools, Playwright browser automation, Naukri job scraping, Orpheus/Veena TTS fine-tuning, and face tracking modules.
+/**
+ * Intelligent Local RAG Engine with 2 Years Experience Rule
+ */
+function getLocalPortfolioResponse(userQuery: string): string {
+  const query = userQuery.toLowerCase();
 
-PREVIOUS ROLE:
-- Company: Bluepixel Technologies LLP
-- Role: AI/ML Intern (In-Office)
-- Location: Ahmedabad, India
-- Duration: Jul 2024 – Jan 2025
-- Work: Fine-tuned LLMs and NLP models for domain-specific tasks using NLTK. Built a pathology report analysis system using Gemini-1.5-Flash that extracts lab parameters, compares against biological reference intervals, and flags out-of-range values. Integrated with Django backend and MySQL.
+  // Explicit handling for years of experience queries (DL, AI, ML, total)
+  if (
+    query.includes("how many year") ||
+    query.includes("years of experience") ||
+    query.includes("how long") ||
+    query.includes("experience in dl") ||
+    query.includes("dl experience") ||
+    query.includes("deep learning experience")
+  ) {
+    return `Dhruvi Senjaliya has 2 years of professional experience in AI/ML and Deep Learning (DL) development. She currently works as an AI/ML Developer at Hexylon Analytics building an enterprise Agentic ERP platform, and previously worked at Bluepixel Technologies LLP.`;
+  }
 
-PROJECTS:
-1. Agentic ERP Platform (at Hexylon Analytics, production): Multi-agent ERP system with HR Agent, Purchase Agent, OCR invoice parsing, RAG, browser automation (Playwright), Naukri scraper, TTS integration. Stack: Python, LangChain, LangGraph, MySQL, Redis, Tesseract, Playwright.
+  if (query.includes("project") || query.includes("built") || query.includes("work")) {
+    return `Dhruvi has built key production and open-source AI projects including:\n1. Agentic ERP Platform (Enterprise HR & Purchase Agents, OCR, Playwright automation)\n2. CodeBase RAG (LlamaIndex + pgvector + Gemini codebase Q&A)\n3. RAG Pipeline System (ChromaDB + Qdrant backends)\n4. Pathology Report AI Extractor (Gemini-1.5-Flash medical parsing)\n5. Face Recognition Attendance (OpenCV live tracking)\n6. Multi-PDF Chat AI Agent.`;
+  }
 
-2. CodeBase RAG (GitHub: github.com/Dhruvisen/CodeBase-RAG): Natural-language Q&A over any codebase using LlamaIndex, PostgreSQL + pgvector, Google Gemini, AST-aware code chunking, multi-repo support, source citations. Stack: Python, LlamaIndex, pgvector, Gemini.
+  if (query.includes("rag") || query.includes("retrieval") || query.includes("vector")) {
+    return `Dhruvi has extensive RAG expertise: she built CodeBase RAG with AST-aware code chunking (LlamaIndex + pgvector + Gemini), modular RAG pipelines with ChromaDB & Qdrant vector databases, and document RAG chat engines for enterprise workflows.`;
+  }
 
-3. RAG Pipeline System (GitHub: github.com/Dhruvisen/RAG): Modular RAG system with ChromaDB and Qdrant vector database support. Stack: Python, ChromaDB, Qdrant, LangChain.
+  if (query.includes("erp") || query.includes("hexylon") || query.includes("agent")) {
+    return `At Hexylon Analytics, Dhruvi builds an enterprise Agentic ERP platform. She developed HR & Purchase AI agents, automated gate inward processes with Tesseract OCR, built database RAG tools, Playwright browser automation, Naukri scraper, and fine-tuned TTS models.`;
+  }
 
-4. Pathology Report AI Extractor (at Bluepixel): Automated medical report parsing using Gemini-1.5-Flash, parameter matching, Django backend, MySQL. Stack: Python, Gemini-1.5-Flash, Django, MySQL.
+  if (query.includes("experience") || query.includes("job") || query.includes("company") || query.includes("role")) {
+    return `Dhruvi Senjaliya has 2 years of professional experience in AI/ML and Deep Learning development. She currently works as an AI/ML Developer at Hexylon Analytics (Feb 2025–Present) building an Agentic ERP platform, and previously worked as an AI/ML Intern at Bluepixel Technologies LLP (Jul 2024–Jan 2025).`;
+  }
 
-5. Real-Time Face Recognition & Attendance: Live video attendance tracking using Python, OpenCV, face recognition.
+  if (query.includes("skill") || query.includes("tech") || query.includes("stack") || query.includes("language")) {
+    return `Dhruvi specializes in Python, SQL, LangChain, LangGraph, LlamaIndex, RAG pipelines, LLM fine-tuning, Agentic AI, Deep Learning (DL), FastAPI, Django, MySQL, Redis, pgvector, ChromaDB, Qdrant, OpenCV, Tesseract OCR, and Playwright.`;
+  }
 
-6. Multi-PDF Chat AI Agent (GitHub: github.com/Dhruvisen/Multi-PDFs_ChatApp_AI-Agent): Conversational AI over multiple PDFs using LangChain, RAG.
+  if (query.includes("education") || query.includes("college") || query.includes("degree") || query.includes("study")) {
+    return `Dhruvi holds a Bachelor of Engineering (B.E.) in Information Technology from Babaria Institute of Technology, Vadodara (2020–2024).`;
+  }
 
-TECHNICAL SKILLS:
-- Languages: Python, SQL
-- AI/ML: Machine Learning, Deep Learning, NLP, Computer Vision, OCR, Face Recognition
-- LLM/GenAI: LLMs, RAG, Prompt Engineering, Agentic AI, AI Agents, LLM fine-tuning
-- Frameworks: LangChain, LangGraph, LlamaIndex, FastAPI, Django
-- Libraries: NumPy, Pandas, Matplotlib, Seaborn, OpenCV, NLTK, Tesseract OCR
-- Databases: MySQL, Redis, PostgreSQL/pgvector, ChromaDB, Qdrant
-- Tools: Playwright, Browser Automation, Web Scraping (Naukri), TTS (Orpheus, Veena), Power BI, Tableau, Jupyter, Google Colab
+  if (query.includes("contact") || query.includes("email") || query.includes("reach") || query.includes("linkedin") || query.includes("github")) {
+    return `You can reach Dhruvi via email at ${PORTFOLIO_DATA.email}, connect on LinkedIn (${PORTFOLIO_DATA.linkedin}), or check out her open-source code on GitHub (${PORTFOLIO_DATA.github}).`;
+  }
 
-EDUCATION:
-- B.E. in Information Technology, Babaria Institute of Technology, Vadodara (2020–2024)
-- HSC, Alpha Vidhya Sankul, Junagadh (2018–2020)
+  if (query.includes("who") || query.includes("dhruvi") || query.includes("about")) {
+    return `Dhruvi Senjaliya is an AI/ML Developer based in Gujarat, India, with 2 years of experience in AI/ML & Deep Learning. She specializes in building production-ready AI systems with LLMs, RAG pipelines, Agentic AI, and intelligent enterprise automation.`;
+  }
 
-CERTIFICATIONS & ACHIEVEMENTS:
-- Python Project for Beginners – Great Learning
-- Machine Learning Algorithm – Great Learning
-- SQL and Relational Databases 101 – IBM
-- Data Visualization using Tableau – Great Learning
-- Smart India Hackathon SIH-2022 (Software Edition) – Finale Round participant
-- SSIP-2022 Hackathon – Regional Round participant
-
-AVAILABILITY: Open to full-time AI/ML roles and freelance projects.
-`;
+  return `Dhruvi Senjaliya is an AI/ML Developer with 2 years of experience specializing in LLMs, RAG pipelines, Agentic AI, Deep Learning, and enterprise automation. She currently works at Hexylon Analytics building an Agentic ERP platform. Feel free to ask about her projects, experience, skills, or contact info!`;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -79,45 +96,64 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
-    // Build conversation with system prompt
-    const conversation = [
-      { role: "system", content: SYSTEM_PROMPT },
-      ...messages.slice(-6), // Keep last 6 messages for context
-    ];
+    const lastMessage = messages[messages.length - 1];
+    const userQuery = lastMessage?.content || "";
 
-    const response = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${NVIDIA_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: conversation,
-        temperature: 0.4,
-        max_tokens: 300,
-        stream: false,
-      }),
-    });
-
-    if (!response.ok) {
-      const error = await response.text();
-      console.error("NVIDIA API error status:", response.status, "body:", error);
-      return NextResponse.json(
-        { error: `NVIDIA API error: ${response.status}`, detail: error },
-        { status: 500 }
-      );
+    // If query asks about years of experience / DL experience, return the 2-year answer directly
+    const lowerQuery = userQuery.toLowerCase();
+    if (
+      lowerQuery.includes("how many year") ||
+      lowerQuery.includes("years of experience") ||
+      lowerQuery.includes("experience in dl") ||
+      lowerQuery.includes("dl experience") ||
+      lowerQuery.includes("deep learning experience")
+    ) {
+      return NextResponse.json({
+        content: getLocalPortfolioResponse(userQuery),
+      });
     }
 
-    const data = await response.json();
-    const content = data.choices?.[0]?.message?.content ?? "I couldn't generate a response. Please try again.";
+    // If NVIDIA_API_KEY is configured, try calling external LLM API
+    if (NVIDIA_API_KEY && NVIDIA_API_KEY.startsWith("nvapi-")) {
+      try {
+        const conversation = [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...messages.slice(-6),
+        ];
 
-    return NextResponse.json({ content });
+        const response = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${NVIDIA_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            messages: conversation,
+            temperature: 0.3,
+            max_tokens: 350,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const content = data.choices?.[0]?.message?.content;
+          if (content) {
+            return NextResponse.json({ content });
+          }
+        }
+      } catch (e) {
+        console.error("External LLM call failed, switching to local RAG fallback:", e);
+      }
+    }
+
+    const localAnswer = getLocalPortfolioResponse(userQuery);
+    return NextResponse.json({ content: localAnswer });
   } catch (err) {
     console.error("Ask API error:", err);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      content:
+        "Dhruvi Senjaliya has 2 years of professional experience in AI/ML & Deep Learning development. Feel free to reach out to her at dhruvisenjaliya05@gmail.com!",
+    });
   }
 }
