@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AskPortfolioButton from "@/components/AskPortfolioButton";
 
+import Script from "next/script";
+
 export const metadata: Metadata = {
   title: "Dhruvi Senjaliya — AI/ML Developer",
   description:
@@ -60,7 +62,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
-        <script
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {

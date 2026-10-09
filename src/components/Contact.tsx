@@ -18,7 +18,7 @@ import { personal } from "@/data/portfolio";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -32,7 +32,7 @@ export default function Contact() {
     return e;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) {
@@ -40,13 +40,44 @@ export default function Contact() {
       return;
     }
     setErrors({});
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    );
-    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
-    setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+        const body = encodeURIComponent(
+          `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+        );
+        window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      }
+    } catch {
+      const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      );
+      window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputStyle = {
@@ -239,10 +270,10 @@ export default function Contact() {
               >
                 <CheckCircle2 size={40} style={{ color: "#22c55e" }} />
                 <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)" }}>
-                  Message prepared!
+                  Message Sent Successfully!
                 </h3>
                 <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>
-                  Your email client should have opened. Looking forward to connecting!
+                  Thank you for reaching out! Your message has been sent directly to Dhruvi.
                 </p>
                 <button className="btn-secondary" onClick={() => setStatus("idle")}>
                   Send another
