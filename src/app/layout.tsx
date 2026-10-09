@@ -15,8 +15,6 @@ export const metadata: Metadata = {
     "LLM Engineer",
     "RAG",
     "Agentic AI",
-    "LangChain",
-    "LangGraph",
     "Python",
     "Dhruvi Senjaliya",
     "Generative AI",

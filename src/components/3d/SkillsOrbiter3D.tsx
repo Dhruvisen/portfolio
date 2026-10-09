@@ -4,7 +4,7 @@
  * SkillsOrbiter3D Component
  * -----------------------------------------------------------------------------
  * Interactive 3D orbiting skill cluster featuring glowing tech spheres (Python,
- * PyTorch, LangChain, RAG, Vector DBs, etc.). Responds to mouse hover with node
+ * PyTorch, RAG, Vector DBs, etc.). Responds to mouse hover with node
  * expansion, emissive glow, and high-performance WebGL 3D text sprites.
  * Compatible with React 19 & Next.js 16 without root unmount warnings.
  */

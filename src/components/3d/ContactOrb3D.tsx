@@ -98,20 +98,7 @@ export default function ContactOrb3D() {
         <pointLight position={[-5, -5, -5]} intensity={1.2} color="#22d3ee" />
         <ContactMesh />
       </Canvas>
-      <div
-        style={{
-          position: "absolute",
-          bottom: "8px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "0.7rem",
-          color: "var(--text-muted)",
-          pointerEvents: "none",
-        }}
-      >
-        ✦ Neural Signal Active
-      </div>
+
     </div>
   );
 }

@@ -209,7 +209,6 @@ export default function Architecture() {
               {[
                 "Python",
                 "LangChain",
-                "LangGraph",
                 "LlamaIndex",
                 "FastAPI",
                 "RAG",

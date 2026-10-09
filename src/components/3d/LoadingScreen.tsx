@@ -57,18 +57,7 @@ export default function LoadingScreen() {
         <div className="cube-face cube-bottom" />
       </div>
 
-      <div
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "0.85rem",
-          fontWeight: 600,
-          color: "var(--accent-primary, #6366f1)",
-          letterSpacing: "0.1em",
-          marginBottom: "1rem",
-        }}
-      >
-        INITIALIZING 3D ENGINE... {Math.min(progress, 100)}%
-      </div>
+
 
       {/* Progress Bar Container */}
       <div

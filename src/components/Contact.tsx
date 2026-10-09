@@ -14,10 +14,7 @@ import { Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
 import { personal } from "@/data/portfolio";
 
-// Dynamically import 3D Contact Orb canvas (SSR disabled)
-const ContactOrb3D = dynamic(() => import("@/components/3d/ContactOrb3D"), {
-  ssr: false,
-});
+
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
@@ -222,13 +219,7 @@ export default function Contact() {
               </span>
             </div>
 
-            {/* 
-              -------------------------------------------------------------------
-              3D ELEMENT #6: Contact 3D Rotating Ring & Plasma Core Orb
-              R3F interactive canvas embedded next to contact details
-              -------------------------------------------------------------------
-            */}
-            <ContactOrb3D />
+
           </div>
 
           {/* Right: Contact Form */}

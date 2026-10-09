@@ -21,7 +21,7 @@ VERIFIED DETAILS:
 - Current Role: AI/ML Developer at Hexylon Analytics (Feb 2025–Present) building an Agentic ERP platform with HR & Purchase AI agents, Tesseract OCR invoice parsing, database RAG tools, Playwright browser automation, Naukri scraper, TTS fine-tuning (Orpheus/Veena), and face tracking.
 - Previous Role: AI/ML Intern at Bluepixel Technologies LLP (Jul 2024–Jan 2025) building a pathology report AI analysis system using Gemini-1.5-Flash, Django, MySQL, NLTK.
 - Key Projects: Agentic ERP Platform (Hexylon), CodeBase RAG (LlamaIndex + pgvector + Gemini), RAG Pipeline System (ChromaDB + Qdrant), Pathology Report AI Extractor, Real-Time Face Recognition Attendance (OpenCV), Multi-PDF Chat AI Agent.
-- Technical Skills: Python, SQL, LangChain, LangGraph, LlamaIndex, RAG, LLMs, Agentic AI, Deep Learning (DL), FastAPI, Django, MySQL, Redis, pgvector, ChromaDB, Qdrant, OpenCV, Tesseract OCR, Playwright.
+- Technical Skills: Python, SQL, LlamaIndex, RAG, LLMs, Agentic AI, Deep Learning (DL), FastAPI, Django, MySQL, Redis, pgvector, ChromaDB, Qdrant, OpenCV, Tesseract OCR, Playwright.
 - Education: B.E. in IT from Babaria Institute of Technology, Vadodara (2020–2024).
 - Hackathons & Certifications: Smart India Hackathon (SIH-2022 Finale), SSIP-2022 Hackathon Regional, IBM Relational Databases 101, Great Learning Machine Learning & Python.`;
 
@@ -70,7 +70,7 @@ function getLocalPortfolioResponse(userQuery: string): string {
   }
 
   if (query.includes("skill") || query.includes("tech") || query.includes("stack") || query.includes("language")) {
-    return `Dhruvi specializes in Python, SQL, LangChain, LangGraph, LlamaIndex, RAG pipelines, LLM fine-tuning, Agentic AI, Deep Learning (DL), FastAPI, Django, MySQL, Redis, pgvector, ChromaDB, Qdrant, OpenCV, Tesseract OCR, and Playwright.`;
+    return `Dhruvi specializes in Python, SQL, LlamaIndex, RAG pipelines, LLM fine-tuning, Agentic AI, Deep Learning (DL), FastAPI, Django, MySQL, Redis, pgvector, ChromaDB, Qdrant, OpenCV, Tesseract OCR, and Playwright.`;
   }
 
   if (query.includes("education") || query.includes("college") || query.includes("degree") || query.includes("study")) {

@@ -37,8 +37,6 @@ export const experience = [
     ],
     technologies: [
       "Python",
-      "LangChain",
-      "LangGraph",
       "RAG",
       "OCR",
       "Tesseract",
@@ -120,8 +118,6 @@ export const projects = [
     ],
     technologies: [
       "Python",
-      "LangChain",
-      "LangGraph",
       "RAG",
       "OCR",
       "Playwright",
@@ -201,7 +197,7 @@ export const projects = [
     ],
     agents: [],
     tools: ["ChromaDB", "Qdrant", "Embeddings"],
-    technologies: ["Python", "ChromaDB", "Qdrant", "RAG", "LangChain", "NLP"],
+    technologies: ["Python", "ChromaDB", "Qdrant", "RAG", "NLP"],
     github: "https://github.com/Dhruvisen/RAG",
     demo: null,
     status: "Open Source",
@@ -291,7 +287,7 @@ export const projects = [
     ],
     agents: ["PDF Q&A Agent"],
     tools: ["Vector Store", "PDF Parser"],
-    technologies: ["Python", "LangChain", "RAG", "PDF Processing"],
+    technologies: ["Python", "RAG", "PDF Processing"],
     github: "https://github.com/Dhruvisen/Multi-PDFs_ChatApp_AI-Agent",
     demo: null,
     status: "Open Source",
@@ -310,7 +306,6 @@ export const skills = {
   ],
   "Frameworks & Orchestration": [
     { name: "LangChain", level: "Advanced" },
-    { name: "LangGraph", level: "Intermediate" },
     { name: "LlamaIndex", level: "Intermediate" },
   ],
   "AI / ML": [
@@ -482,8 +477,8 @@ export const architectureSteps = [
   {
     id: "agent",
     label: "Agent / Orchestration",
-    sublabel: "LangChain, LangGraph agents",
-    description: "Agent orchestrators (built with LangChain / LangGraph) decide which tools to use, sequence multi-step reasoning, and handle complex workflows like ERP automation.",
+    sublabel: "Multi-agent systems",
+    description: "Agent orchestrators decide which tools to use, sequence multi-step reasoning, and handle complex workflows like ERP automation.",
     color: "#c084fc",
   },
   {
@@ -519,7 +514,7 @@ export const architectureSteps = [
 export const portfolioQA: Record<string, string> = {
   "what ai projects": "Dhruvi has worked on an Agentic ERP Platform (HR & Purchase agents, OCR, browser automation), CodeBase RAG (natural-language codebase assistant), a RAG Pipeline System (ChromaDB + Qdrant), a Pathology Report AI Extractor (Gemini-1.5-Flash), a Face Recognition Attendance System, and a Multi-PDF Chat AI Agent.",
   "rag experience": "Dhruvi has extensive RAG experience: built RAG systems using LlamaIndex + pgvector + Gemini, ChromaDB, and Qdrant. Implemented AST-aware code chunking for CodeBase-RAG, chat-based RAG tools in the Agentic ERP, and a document RAG engine.",
-  "what technologies": "Dhruvi specializes in Python, LangChain, LangGraph, RAG, LLMs, LlamaIndex, OCR (Tesseract), Playwright, MySQL, Redis, PostgreSQL/pgvector, ChromaDB, Qdrant, OpenCV, NLTK, FastAPI, Django, NumPy, Pandas, Power BI, and Tableau.",
+  "what technologies": "Dhruvi specializes in Python, RAG, LLMs, LlamaIndex, OCR (Tesseract), Playwright, MySQL, Redis, PostgreSQL/pgvector, ChromaDB, Qdrant, OpenCV, NLTK, FastAPI, Django, NumPy, Pandas, Power BI, and Tableau.",
   "erp project": "The Agentic ERP project at Hexylon Analytics integrates HR and Purchase agents, OCR-based invoice parsing, database-driven agents, Playwright browser automation, Naukri job scraping, TTS (Orpheus/Veena), and face tracking into an enterprise ERP platform.",
   "experience": "Dhruvi has ~2 years of professional experience: AI/ML Developer at Hexylon Analytics (Feb 2025–Present) building an Agentic ERP platform, and AI/ML Intern at Bluepixel Technologies (Jul 2024–Jan 2025) building NLP systems and a pathology report extractor.",
   "education": "Dhruvi holds a Bachelor of Engineering in Information Technology from Babaria Institute of Technology, Vadodara (2020–2024).",

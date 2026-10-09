@@ -11,7 +11,7 @@ const pillars = [
   {
     icon: Workflow,
     label: "Agentic AI Systems",
-    desc: "Designing multi-agent orchestration with LangChain/LangGraph — agents that reason, use tools, and complete complex workflows.",
+    desc: "Designing multi-agent orchestration — agents that reason, use tools, and complete complex workflows.",
   },
   {
     icon: Code2,
@@ -70,8 +70,7 @@ export default function About() {
               My work spans the full AI stack:{" "}
               <strong style={{ color: "var(--text-primary)" }}>RAG pipelines</strong> with vector databases, 
               <strong style={{ color: "var(--text-primary)" }}> LLM fine-tuning</strong> for domain tasks, 
-              <strong style={{ color: "var(--text-primary)" }}> agentic orchestration</strong> with LangChain 
-              and LangGraph, and production backends with FastAPI and Django. I care about building systems 
+              <strong style={{ color: "var(--text-primary)" }}> agentic orchestration</strong> for enterprise automation, and production backends with FastAPI and Django. I care about building systems 
               that are reliable, maintainable, and useful — not just technically impressive.
             </p>
             <p className="prose-bio">
