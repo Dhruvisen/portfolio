@@ -172,15 +172,6 @@ export default function AskPortfolioButton() {
                 <div style={{ fontSize: "0.875rem", fontWeight: 700, color: "#fff" }}>
                   Ask my portfolio
                 </div>
-                <div
-                  style={{
-                    fontSize: "0.68rem",
-                    color: "rgba(255,255,255,0.7)",
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  nvidia/llama-3.1-nemotron-70b
-                </div>
               </div>
             </div>
             <button
@@ -203,20 +194,7 @@ export default function AskPortfolioButton() {
             </button>
           </div>
 
-          {/* Disclaimer */}
-          <div
-            style={{
-              padding: "5px 12px",
-              background: "rgba(99,102,241,0.06)",
-              borderBottom: "1px solid var(--border-card)",
-              fontSize: "0.67rem",
-              color: "var(--text-muted)",
-              fontFamily: "'JetBrains Mono', monospace",
-              flexShrink: 0,
-            }}
-          >
-            ⚡ Grounded in Dhruvi&apos;s verified portfolio data only
-          </div>
+
 
           {/* Messages */}
           <div
